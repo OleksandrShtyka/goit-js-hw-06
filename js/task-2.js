@@ -1,32 +1,23 @@
+// Task #2 — Storage with private field
 class Storage {
+  #items;
   constructor(items) {
-    this._items = items;
+    this.#items = Array.isArray(items) ? [...items] : [];
   }
-
   getItems() {
-    return this._items;
+    return this.#items;
   }
-
   addItem(newItem) {
-    this._items.push(newItem);
+    this.#items.push(newItem);
   }
-
   removeItem(itemToRemove) {
-    const index = this._items.indexOf(itemToRemove);
-    if (index !== -1) {
-      this._items.splice(index, 1);
-    }
+    this.#items = this.#items.filter(item => item !== itemToRemove);
   }
 }
 
-const storage = new Storage(['Nanitoids', 'Prolonger', 'Antigravitator']);
-console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator"]
-
-storage.addItem('Droid');
-console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator", "Droid"]
-
-storage.removeItem('Prolonger');
+// Demo
+const storage = new Storage(["Nanitoids", "Antigravitator"]);
+storage.addItem("Droid");
 console.log(storage.getItems()); // ["Nanitoids", "Antigravitator", "Droid"]
-
-storage.removeItem('Scaner');
-console.log(storage.getItems()); // ["Nanitoids", "Antigravitator", "Droid"]
+storage.removeItem("Antigravitator");
+console.log(storage.getItems()); // ["Nanitoids", "Droid"]

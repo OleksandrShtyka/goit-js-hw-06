@@ -1,33 +1,29 @@
+// Task #3 — StringBuilder with private field
 class StringBuilder {
+  #value;
   constructor(initialValue) {
-    this._value = initialValue;
+    this.#value = String(initialValue ?? "");
   }
-
   getValue() {
-    return this._value;
+    return this.#value;
   }
-
   padEnd(str) {
-    this._value += str;
+    this.#value += String(str);
   }
-
   padStart(str) {
-    this._value = str + this._value;
+    this.#value = String(str) + this.#value;
   }
-
   padBoth(str) {
-    this._value = str + this._value + str;
+    this.padStart(str);
+    this.padEnd(str);
   }
 }
 
-const builder = new StringBuilder('.');
-console.log(builder.getValue()); // "."
-
-builder.padStart('^');
+// Demo
+const builder = new StringBuilder(".");
+builder.padStart("^");
 console.log(builder.getValue()); // "^."
-
-builder.padEnd('^');
+builder.padEnd("^");
 console.log(builder.getValue()); // "^.^"
-
-builder.padBoth('=');
+builder.padBoth("=");
 console.log(builder.getValue()); // "=^.^="
